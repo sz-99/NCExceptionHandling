@@ -9,6 +9,11 @@ namespace ExceptionHandling
 {
     internal class UserData
     {
+        internal enum Employed
+        {
+            YES,
+            NO
+        }
         public static string GetName()
         {
             Console.WriteLine("Please give us your full name.");
@@ -62,10 +67,19 @@ namespace ExceptionHandling
             return weight;
         }
 
-        internal enum Employed
+        internal static Employed GetEmployment()
         {
-            YES,
-            NO
+            Console.WriteLine("Are you employed? Please input \"Y\" or \"N\"");
+            Employed result = Employed.NO;
+            string input = Console.ReadLine();
+
+            if (input != "Y" && input != "N")
+            {
+                Console.WriteLine("Employment input was invalid, please try again.");
+                result = GetEmployment();
+            }
+            return result;
         }
+
     }
 }
