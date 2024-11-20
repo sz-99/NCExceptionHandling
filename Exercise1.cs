@@ -18,20 +18,24 @@ namespace ExceptionHandling
             bool numbersInvalid = true;
             while (numbersInvalid)
             {
-              try
+                try
                 {
                     intsToDivide = GetUserInputs();
+                    int result = Divide(intsToDivide[0], intsToDivide[1]);
+                    Console.WriteLine($"Result: {result}");
                 }
-                catch(FormatException ex)
+                catch (FormatException ex)
                 {
                     Console.WriteLine("Numbers invalid, please try again.");
                     DivideUserInputs();
                 }
+                catch (DivideByZeroException ex)
+                {
+                    Console.WriteLine("Denominator cannot be 0, please try again.");
+                    DivideUserInputs();
+                }
                 numbersInvalid = false;
-
             }
-            int result = Divide(intsToDivide[0], intsToDivide[1]);
-            Console.WriteLine($"Result: {result}");
         }
         private static int[] GetUserInputs()
         {
