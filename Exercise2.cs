@@ -26,20 +26,19 @@ namespace ExceptionHandling
             double weight = UserData.GetWeight();
 
             // Employment
-            Console.WriteLine("Are you employed?: ");
-            string employed = Console.ReadLine();
+            
+            Employed employed = UserData.GetEmployment();
 
             // Occupation
-            Console.WriteLine("What is your occupation?: ");
-            string occupation = Console.ReadLine();
+            
+            Occupation occupation = UserData.GetOccupation();
 
             // Student
-            Console.WriteLine("Are you a student?: ");
-            string isStudent = Console.ReadLine();
+            bool isStudent = UserData.GetStudentStatus();
 
             Console.WriteLine("\nThank you, " + name + ", for providing your information!");
             Console.WriteLine("Your Blummin monthly subscription is: £"
-                    + CalculateSubscriptionCharge(Int32.Parse(age), Double.Parse(height), Double.Parse(weight), occupation, bool.Parse(isStudent)));
+                    + CalculateSubscriptionCharge(age, height, weight, occupation.ToString(), isStudent));
         }
 
         private static double CalculateSubscriptionCharge(int age, double height, double weight, string occupation, bool isStudent)

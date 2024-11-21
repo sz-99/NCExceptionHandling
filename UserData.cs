@@ -7,13 +7,8 @@ using System.Xml.Linq;
 
 namespace ExceptionHandling
 {
-    internal class UserData
+    public class UserData
     {
-        internal enum Employed
-        {
-            YES,
-            NO
-        }
         public static string GetName()
         {
             Console.WriteLine("Please give us your full name.");
@@ -21,8 +16,9 @@ namespace ExceptionHandling
             if (result is null || !result.Contains(" ") || result[0] == ' ' || result[^1] == ' ') 
             {
                 Console.WriteLine("Name invalid, please try again.");
+                result = GetName();
             }
-            result = GetName();
+            
             return result;
         }
 
@@ -73,11 +69,62 @@ namespace ExceptionHandling
             Employed result = Employed.NO;
             string input = Console.ReadLine();
 
-            if (input != "Y" && input != "N")
+            if (input.ToUpper() != "Y" && input.ToUpper() != "N")
             {
                 Console.WriteLine("Employment input was invalid, please try again.");
                 result = GetEmployment();
             }
+            if (input.ToUpper() == "Y") result = Employed.YES;
+            return result;
+        }
+
+        internal static Occupation GetOccupation()
+        {
+
+            Console.WriteLine("What is your occupation?: ");
+            
+            string input = Console.ReadLine();
+            Occupation result = Occupation.other;
+            switch (input.ToLower())
+                {
+                    case "student":
+                        result = Occupation.student;
+                        break;
+                    case "engineer":
+                        result = Occupation.engineer;
+                        break;
+                    case "teacher":
+                        result = Occupation.teacher;
+                        break;
+                    case "sales":
+                        result = Occupation.ceo;
+                        break;
+                    case "ceo":
+                        result = Occupation.ceo;
+                        break;
+
+                    default:
+                        result = Occupation.other;
+                        break;
+                }
+           
+
+
+            return result;
+        }
+
+        internal static bool GetStudentStatus()
+        {
+            Console.WriteLine("Are you a student? Please input \"Y\" or \"N\"");
+            bool result = false;
+            string input = Console.ReadLine();
+
+            if (input.ToUpper() != "Y" && input.ToUpper() != "N")
+            {
+                Console.WriteLine("Student status was invalid, please try again.");
+                result = GetStudentStatus();
+            }
+            if (input.ToUpper() == "Y") result = true;
             return result;
         }
 
